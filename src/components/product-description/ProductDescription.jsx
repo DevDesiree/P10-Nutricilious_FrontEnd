@@ -23,19 +23,19 @@ const ProductDescription = () => {
   };
 
   return (
-    <div className="flex space-x-4 p-4">
-      <div className="bg-white shadow-md p-10 rounded-md w-1/2">
+    <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4  p-4">
+      <div className="bg-white shadow-md p-4 lg:p-10 rounded-md lg:w-1/2">
         <img
           src={Tomate}
           alt="Imagen del Producto"
-          className="w-[70%] h-auto object-cover m-auto rounded-md"
+          className="w-[90%] lg:w-[70%] h-auto object-cover mx-auto rounded-md"
         />
-        <h2 className="text-md font-normal w-[70%] m-auto text-left mt-2">
+        <h2 className="text-md font-normal w-[90%] lg:w-[70%] m-auto text-left mt-2">
           {product.name}
         </h2>
       </div>
 
-      <div className="bg-white shadow-md p-4 rounded-md w-1/2">
+      <div className="bg-white shadow-md p-4 rounded-md lg:w-1/2">
         <h3 className="text-md font-semibold mb-4 text-left">
           {product.category + " >" + " Fruta"}
         </h3>
@@ -61,12 +61,12 @@ const ProductDescription = () => {
                 >
                   +
                 </button>
+                <button className=" px-1 py-1 rounded-md hover:text-yellow-400">
+                  <i className="fa fa-cart-plus" aria-hidden="true"></i>
+                </button>
               </div>
             </div>
           </div>
-          {/* <button className="bg-yellow-300 px-4 py-2 rounded-md hover:bg-yellow-500">
-            Añadir al carrito
-          </button> */}
         </div>
       </div>
     </div>

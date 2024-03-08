@@ -1,12 +1,13 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import { Banner } from "./components/banner/Banner.jsx";
 
-export default function App() {
+
+export const App = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
-}
+    <div>
+      <Banner currentIndex={currentIndex} setCurrentIndex={setCurrentIndex} />
+    </div>
+  );
+};

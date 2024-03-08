@@ -15,7 +15,10 @@ export default function CardComponentQuantity() {
     };
 
     return (
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="relative w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div className="absolute top-0 left-0 bg-gray-500 bg-opacity-50 rounded-t-lg py-1 px-2">
+            <span className="text-sm font-bold text-gray-900 dark:text-gray">Fruta</span>
+        </div>
             <a href="#">
                 <img className="rounded-t-lg h-40 w-full object-cover object-center" src={naranja} alt="naranja" />
             </a>
@@ -25,17 +28,16 @@ export default function CardComponentQuantity() {
                     <span className="text-3xl font-bold text-gray-900 dark:text-gray">0.30 €/ud</span>
                 </div>
                 <div className="flex justify-between items-center">
-                   
                 <div className="flex items-center justify-between">
-                    <a
-                        type="button"
-                        href="#"
-                        className="focus:outline-none text-gray bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-                    >
-                        Saber más
-                    </a>
-                </div>
-                <div className="flex items-center border-gray-100">
+                        <a
+                            type="button"
+                            href="#"
+                            className="focus:outline-none text-gray bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                        >
+                            Saber más
+                        </a>
+                    </div>
+                    <div className="flex items-center border-gray-100">
                         <span
                             className="cursor-pointer rounded-full bg-gray-100 py-1 px-3.5 duration-100 hover:bg-yellow-400 hover:text-gray flex justify-center items-center shadow-md"
                             onClick={decreaseQuantity}

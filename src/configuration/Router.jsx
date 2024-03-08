@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Product from "../pages/Product";
 
 
-function Router() {
+export default function Router() {
   return (
     <BrowserRouter>
     <Routes>
@@ -14,5 +14,3 @@ function Router() {
 </BrowserRouter>
   )
 }
-
-export default Router

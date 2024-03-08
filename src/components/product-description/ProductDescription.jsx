@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Tomate from "../../assets/images/Tomate.svg";
 
 const ProductDescription = () => {

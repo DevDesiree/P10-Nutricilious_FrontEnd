@@ -4,9 +4,8 @@ import CardComponent from "../components/card-component/CardComponent";
 const Home = () => {
   return (
     <>    
-    {/* <Navbar/>   */}
+    {/* <Banner/>   */}
     <CardComponent/>
-    {/* <Footer/> */}
     </>
   )
 }

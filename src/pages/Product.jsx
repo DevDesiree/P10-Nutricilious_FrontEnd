@@ -1,10 +1,10 @@
-// import ProductComponent from "../components/card-component/CardComponent";
+import ProductDescription from "../components/product-description/ProductDescription";
 
 
 const Product = () => {
   return (
     <>    
-    {/* <CardComponent/> */}
+    <ProductDescription></ProductDescription>
     </>
   )
 }

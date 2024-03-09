@@ -243,7 +243,7 @@ const CompanyProductsTable = () => {
   };
 
   return (
-    <div className="my-4 mx-auto py-3 px-8 w-[80%] bg-transparent dark:bg-black dark:text-white rounded-md">
+    <div className="my-4 mx-auto py-3 px-8 w-[80%] bg-white shadow-2xl dark:bg-black dark:text-white rounded-md">
       <h2 className="text-black text-2xl font-bold mb-4">
         Listado de Productos
       </h2>
@@ -262,7 +262,7 @@ const CompanyProductsTable = () => {
         </select>
         <Link to={`/company/create`} className="mt-4 ml-[1%] bg-yellow-400 text-black py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"> <i className="fa fa-plus-circle" aria-hidden="true"></i> Crear Producto </Link>
       </div>
-      <div className="overflow-x-auto shadow-md rounded-xl">
+      <div className="overflow-x-auto shadow-sm rounded-xl">
         <table className="w-full text-sm text-left bg-white dark:bg-gray-800 border dark:border-gray-700 ">
           <thead className="text-md text-white bg-black ">
             <tr>

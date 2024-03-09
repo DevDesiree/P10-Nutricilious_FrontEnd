@@ -1,4 +1,3 @@
-import React from 'react'
 import Pagination from '../components/pagination/Pagination'
 import Search from '../components/search/Search'
 

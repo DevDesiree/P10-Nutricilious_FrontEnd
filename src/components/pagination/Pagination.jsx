@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
-// Example items, to simulate fetching from another resources.
+//Example items, to simulate fetching from another resources.
 const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17];
 
 function Items({ currentItems }) {
@@ -9,8 +10,9 @@ function Items({ currentItems }) {
     <div className="flex flex-wrap justify-center gap-4 mt-4">
       {currentItems &&
         currentItems.map((item) => (
-          <div key={item} className="bg-gray-100 p-4 rounded-md">
-            <h3 className="text-lg font-semibold">Item #{item}</h3>
+          //className="bg-gray-100 p-4 rounded-md"
+          <div key={item}> 
+            {/* <h3 className="text-lg font-semibold">Item #{item}</h3> */}
           </div>
         ))}
     </div>

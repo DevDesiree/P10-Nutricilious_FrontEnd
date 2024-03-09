@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
+import Register from "../pages/Register";
 
 
 export default function Router() {
@@ -12,6 +13,8 @@ export default function Router() {
         <Route path="/product" element={<Product/>}></Route> 
         {/* <Route path="/cart" element={<Cart/>}></Route>  */}
         <Route path="/products" element={<Products></Products>}></Route> 
+        <Route path="/register" element={<Register/>}></Route>
+        
     </Routes>
 </BrowserRouter>
   )

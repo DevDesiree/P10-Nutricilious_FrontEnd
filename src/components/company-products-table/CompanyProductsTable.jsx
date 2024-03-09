@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 const CompanyProductsTable = () => {
-  const itemsPerPage = 5;
+  const itemsPerPage = 6;
   const productsData = [
     { id: 1, name: 'Producto 1', price: 10.99, stock: 20, status: 'Active', category: 'Electrónicos', companyId: 1 },
     { id: 2, name: 'Producto 2', price: 15.99, stock: 15, status: 'Inactive', category: 'Ropa', companyId: 2 },
@@ -86,7 +86,7 @@ const CompanyProductsTable = () => {
       };
 
  return (
-    <div className="my-5 mx-auto py-4 px-8 w-[80%] bg-transparent dark:bg-black dark:text-white rounded-md">
+    <div className="my-4 mx-auto py-3 px-8 w-[80%] bg-transparent dark:bg-black dark:text-white rounded-md">
       <h2 className="text-black text-2xl font-bold mb-4">Listado de Productos</h2>
       <div className="flex items-center space-x-4 mb-4">
         <select
@@ -102,8 +102,8 @@ const CompanyProductsTable = () => {
           ))}
         </select>
       </div>
-      <div className="overflow-x-auto">
-      <table className="w-full text-sm text-left bg-white dark:bg-gray-800 border dark:border-gray-700">
+      <div className="overflow-x-auto shadow-md rounded-xl">
+      <table className="w-full text-sm text-left bg-white dark:bg-gray-800 border dark:border-gray-700 ">
         <thead className="text-md text-white bg-black ">
           <tr>
             <th className="px-4 py-2">Nombre del Producto</th>
@@ -129,21 +129,21 @@ const CompanyProductsTable = () => {
               <td className="px-4 py-2 flex flex-wrap gap-2">
                 <button
                   onClick={() => editProduct(product.id)}
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  className="font-medium text-yellow-500 hover:text-yellow-900"
                 >
-                  Editar
+                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                 </button>
                 <button
                   onClick={() => viewProduct(product.id)}
-                  className="font-medium text-gray-800 dark:text-gray-800 hover:underline"
+                  className="font-medium text-gray-800 hover:text-gray-500"
                 >
-                  Detalles
+                 <i class="fa fa-eye"></i>
                 </button>
                 <button
                   onClick={() => deleteProduct(product.id)}
-                  className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  className="font-medium text-red-600 hover:text-red-800"
                 >
-                  Eliminar
+                <i class="fas fa-trash" aria-hidden="true"></i>
                 </button>
               </td>
             </tr>

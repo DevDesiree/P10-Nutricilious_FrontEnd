@@ -4,10 +4,10 @@ import Search from '../components/search/Search'
 
 const Products = () => {
   return (
-    <>
-    <Search></Search>
+    <div className='w-full'>
+      <Search></Search>
       <Pagination itemsPerPage={4}></Pagination>
-    </>
+    </div>
   )
 }
 

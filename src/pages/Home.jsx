@@ -1,6 +1,4 @@
 import CardComponent from "../components/card-component/CardComponent";
-import CardComponentQuantity from "../components/card-component/CardComponentQuantity";
-// import CartComponent from "../components/cart-component/CartComponent";
 import CarouselBasicExample from "../components/banner/Banner.jsx"
 
 
@@ -8,10 +6,20 @@ import CarouselBasicExample from "../components/banner/Banner.jsx"
 const Home = () => {
   return (
     <>    
+    {/* <NavBar/> */}
     <CarouselBasicExample/>
+    <div className="grid grid-cols-2 gap-4 my-5">
     <CardComponent/>
-    <CardComponentQuantity/>
-    {/* <CartComponent/> */}
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    <CardComponent/>
+    </div>
+
+
+
+
     </>
   )
 }

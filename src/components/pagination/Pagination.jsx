@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+// import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
+
 import ReactPaginate from 'react-paginate';
 
 // Example items, to simulate fetching from another resources.

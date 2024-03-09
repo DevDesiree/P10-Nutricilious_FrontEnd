@@ -1,6 +1,6 @@
 import CardComponent from "../components/card-component/CardComponent";
 import CarouselBasicExample from "../components/banner/Banner.jsx"
-
+import Search from "../components/search/Search.jsx";
 
 
 const Home = () => {
@@ -8,7 +8,10 @@ const Home = () => {
     <>    
     {/* <NavBar/> */}
     <CarouselBasicExample/>
-    <div className="grid grid-cols-2 gap-4 my-5">
+    <Search/>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 my-5 gap-3 place-items-center">
+    <CardComponent/>
+    <CardComponent/>
     <CardComponent/>
     <CardComponent/>
     <CardComponent/>
@@ -16,10 +19,6 @@ const Home = () => {
     <CardComponent/>
     <CardComponent/>
     </div>
-
-
-
-
     </>
   )
 }

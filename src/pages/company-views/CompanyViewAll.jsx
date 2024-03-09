@@ -1,7 +1,7 @@
 import React from 'react'
 import CompanyProductsTable from '../../components/company-products-table/CompanyProductsTable'
 
-const CompanyView = () => {
+const CompanyViewAll = () => {
   return (
     <div>
       <CompanyProductsTable></CompanyProductsTable>
@@ -9,4 +9,4 @@ const CompanyView = () => {
   )
 }
 
-export default CompanyView
+export default CompanyViewAll

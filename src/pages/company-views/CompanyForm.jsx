@@ -1,10 +1,9 @@
+import React from 'react'
 
 const CompanyForm = () => {
-    return (
-      <>    
-  
-      </>
-    )
-  }
-  
-  export default CompanyForm;
+  return (
+    <div>CompanyForm</div>
+  )
+}
+
+export default CompanyForm

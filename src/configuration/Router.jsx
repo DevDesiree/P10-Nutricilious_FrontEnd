@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import Product from "../pages/Product";
 import Products from "../pages/Products";
 import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 
 export default function Router() {
@@ -14,6 +15,7 @@ export default function Router() {
         {/* <Route path="/cart" element={<Cart/>}></Route>  */}
         <Route path="/products" element={<Products></Products>}></Route> 
         <Route path="/register" element={<Register/>}></Route>
+        <Route path="/login" element={<Login/>}></Route>
         
     </Routes>
 </BrowserRouter>

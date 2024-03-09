@@ -2,10 +2,10 @@ import React from 'react';
 
 const FormRegister = () => {
     return (
-        <form className="max-w-3xl mx-auto rounded-lg p-6 bg-white shadow-2xl sm:rounded-3xl dark:border-gray-600">
+        <form className="max-w-3xl mx-auto rounded-lg p-6 bg-white shadow-2xl sm:rounded-3xl dark:border-gray-600 my-7">
             <h1 className="block mb-2 text-center text-2xl font-medium text-gray-900">Formulario de Registro</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="mb-5">
+                <div>
                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900">Nombre</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -15,7 +15,7 @@ const FormRegister = () => {
                     </div>
                 </div>
 
-                <div className="mb-5 ">
+                <div>
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -25,17 +25,17 @@ const FormRegister = () => {
                     </div>
                 </div>
 
-                <div className="mb-5">
+                <div>
                     <label htmlFor="address" className="block mb-2 text-sm font-medium text-gray-900">Dirección</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#cacac9" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
+                    <div className="relative">
+                        <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="#cacac9" d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" /></svg>
                         </div>
                         <input type="text" id="adress" name="adress" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="C/ Blanca Nº 5" required/>
                     </div>
                 </div>
 
-                <div className="mb-5">
+                <div>
                     <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900">Teléfono</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -45,8 +45,7 @@ const FormRegister = () => {
                     </div>
                 </div>
 
-                <div className="mb-5">
-
+                <div>
                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Contraseña</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -56,7 +55,7 @@ const FormRegister = () => {
                     </div>
 
                 </div>
-                <div className="mb-5">
+                <div className='mb-5'>
                     <label htmlFor="password_confirmation" className="block mb-2 text-sm font-medium text-gray-900">Confirma tu contraseña</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">

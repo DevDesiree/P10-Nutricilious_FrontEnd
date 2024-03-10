@@ -32,7 +32,7 @@ export default function Router() {
         {/* Rutas publicas */}
         <Route path="/" element={<Home/>}></Route> 
         <Route path="/products/category/:id" element={<Products/>}></Route>
-        <Route path="/product/:id/category/:id" element={<Product/>}></Route> 
+        <Route path="/product/:id" element={<Product/>}></Route> 
         <Route path="/cart" element={<CartComponent/>}></Route> 
      
         <Route path="/register" element={<Register/>}></Route>

@@ -79,16 +79,6 @@ const FetchApi = {
     }
   },
 
-<<<<<<< HEAD
-  getProductsByCategory: async (id) => {
-    try {
-      const response = await axios.get(`${API_URL}/products/category/${id}`);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-=======
   getProductsByCategory: async (id_category) => {
     try {
       const response = await axios.get(`${API_URL}/products/category/${id_category}`);
@@ -98,8 +88,6 @@ const FetchApi = {
       return null;
     }
   }
-  
->>>>>>> 60a7b4711fdfdb3f4cc0f6757aa709b5b0eb7619
-};
+  };
 
 export default FetchApi;

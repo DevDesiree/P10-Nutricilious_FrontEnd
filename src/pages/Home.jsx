@@ -59,6 +59,7 @@ const Home = () => {
 
   return (
     <>  
+    <NavbarComponent/>
     <CarouselBasicExample/>
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
       {categories.map((category, index) => (

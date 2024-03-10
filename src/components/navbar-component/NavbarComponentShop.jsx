@@ -1,4 +1,3 @@
-import React from 'react'
 import logoNavbar from '../../assets/images/logo-white.png'
 export default function NavbarComponent() {
     return (
@@ -6,7 +5,7 @@ export default function NavbarComponent() {
 <nav className="bg-black border-black-200 dark:bg-black-900">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5 space-x-10">
     <div>
-        <a href="/home" className="flex items-center space-x-5 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
       <img src={logoNavbar} className="h-20" alt="Logo" />
       <span className="self-center text-4xl font-semibold whitespace-nowrap text-white ">Nutrilicious</span>
         </a>

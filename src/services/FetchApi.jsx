@@ -69,7 +69,7 @@ const FetchApi = {
     }
   },
 
-  // Llamar AdminProductsController@showCategories
+  // Llamar CompanyProductsController@store
   getCategories: async () => {
     try {
       const response = await axios.get(`${API_URL}`);
@@ -79,7 +79,14 @@ const FetchApi = {
     }
   },
 
-
+setCompanyProduct:async () => {
+  try {
+    const response = await axios.get(`${API_URL}/company/products/create`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+},
 
   
 };

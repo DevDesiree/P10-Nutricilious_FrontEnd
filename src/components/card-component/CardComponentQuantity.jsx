@@ -1,7 +1,7 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
-import naranja from '../../assets/images/naranja.jpg';
 
-export default function CardComponentQuantity() {
+const CardComponentQuantity = ({ productName, productPrice, imageUrl }) => {
     const [quantity, setQuantity] = useState(1);
 
     const increaseQuantity = () => {
@@ -17,12 +17,12 @@ export default function CardComponentQuantity() {
     return (
         <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-                <img className="rounded-t-lg h-40 w-full object-cover object-center" src={naranja} alt="naranja" />
+                <img className="rounded-t-lg h-40 w-full object-cover object-center" src={imageUrl} alt={productName} />
             </a>
-            <div className="px-5 p-5">
+            <div className="px-5 py-5">
                 <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">Naranja</h3>
-                    <span className="text-2xl font-bold text-gray-900 dark:text-gray">0.30 €/ud</span>
+                    <h3 className="text-base font-semibold tracking-tight text-gray-900 dark:text-white mr-3 truncate">{productName}</h3>
+                    <span className="text-xl font-bold text-gray-900 dark:text-gray">{productPrice} €/ud</span>
                 </div>
                 <div className="flex justify-between items-center">
                     <div className="flex items-center justify-between">
@@ -58,3 +58,11 @@ export default function CardComponentQuantity() {
         </div>
     );
 }
+
+CardComponentQuantity.propTypes = {
+    productName: PropTypes.string.isRequired,
+    productPrice: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+};
+
+export default CardComponentQuantity;

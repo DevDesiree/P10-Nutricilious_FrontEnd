@@ -5,9 +5,9 @@ const API_URL = 'http://127.0.0.1:8000/api';
 
 const FetchApi = {
   // Llamar AdminProductsController@index
-  getAdminProducts: async () => {
+  getProducts: async () => {
     try {
-      const response = await axios.get(`${API_URL}/admin/products`);
+      const response = await axios.get(`${API_URL}/products`);
       return response.data;
     } catch (error) {
       throw error;

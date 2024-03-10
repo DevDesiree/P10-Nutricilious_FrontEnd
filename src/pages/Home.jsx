@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import CardComponent from "../components/card-component/CardComponent";
 import CarouselBasicExample from "../components/banner/Banner.jsx";
 import NavbarComponent from '../components/navbar-component/NavbarComponent.jsx';
-import Search from "../components/search/Search.jsx";
 import FetchApi from '../services/FetchApi';
 import avocadoYtomate from '../assets/images/avocadoYTomate.jpg';
 import naranja from '../assets/images/naranja.jpg';

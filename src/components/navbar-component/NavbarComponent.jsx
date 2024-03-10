@@ -4,12 +4,11 @@ export default function NavbarComponent() {
     return (
     
 <nav className="bg-black border-black-200 dark:bg-black-900">
-  <div className="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-5 space-x-20"/>
-        <a href="" className="flex items-center space-x-5 rtl:space-x-reverse">
+  <div className="max-w-screen-xl flex flex-wrap items-center justify-center mx-auto p-5 space-x-20">
+  <a href="" className="flex items-center space-x-5 rtl:space-x-reverse">
       <img src={logoNavbar} className="h-20" alt="Logo" />
       <span className="self-center text-3xl font-semibold whitespace-nowrap text-white ">Nutrilicious</span>
-     </a>
-
+  </a>
   <div className="flex-row justify-between space-x-5">
     
       <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Iniciar Sesión</button>

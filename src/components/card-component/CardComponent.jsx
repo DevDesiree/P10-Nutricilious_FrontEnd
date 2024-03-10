@@ -4,7 +4,6 @@ const CardComponent = ({ category, description, imageUrl }) => {
   return (
     <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <a href="#">
-        {/* Adicionando as classes 'rounded-t-lg' para bordas arredondadas e 'h-48' para altura de 48 pixels */}
         <img className="rounded-t-lg w-full h-48 object-cover" src={imageUrl} alt={category.name} />
       </a>
       <div className="p-4">

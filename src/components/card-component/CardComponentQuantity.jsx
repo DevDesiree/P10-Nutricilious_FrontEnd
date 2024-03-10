@@ -27,7 +27,7 @@ const CardComponentQuantity = ({ productName, productPrice, imageUrl, onAddToCar
                 <div className="flex justify-between items-center">
                     <div className="flex items-center justify-between">
                         <button
-                            onClick={onAddToCart} // Adicionado onClick
+                            onClick={onAddToCart}
                             type="button"
                             className="focus:outline-none text-gray bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                         >

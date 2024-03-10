@@ -9,11 +9,11 @@ import CartComponent from '../components/cart-component/CartComponent';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]); // Adicionado estado para as URLs das imagens
+  const [imageUrls, setImageUrls] = useState([]); 
   const [currentPage, setCurrentPage] = useState(0);
-  const [searchText, setSearchText] = useState(''); // Estado para armazenar o texto de pesquisa
-  const [showCart, setShowCart] = useState(false); // Estado para controlar a visibilidade do carrinho
-  const [cartItems, setCartItems] = useState([]); // Estado para armazenar os itens do carrinho
+  const [searchText, setSearchText] = useState('');
+  const [showCart, setShowCart] = useState(false); 
+  const [cartItems, setCartItems] = useState([]); 
   const itemsPerPage = 8;
   const { id: categoryId } = useParams(); 
 
@@ -43,9 +43,22 @@ const Products = () => {
     setSearchText(event.target.value);
   };
 
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
-    setShowCart(true); // Mostrar o carrinho ao adicionar um item
+  const handleAddToCart = (productId, quantity) => {
+    const existingProductIndex = cartItems.findIndex(item => item.id === productId);
+
+    if (existingProductIndex !== -1) {
+        const updatedCartItems = [...cartItems];
+        updatedCartItems[existingProductIndex].quantity += quantity;
+        setCartItems(updatedCartItems);
+    } else {
+        setCartItems([...cartItems, { id: productId, quantity }]);
+    }
+    setShowCart(true);
+};
+
+  const handleRemoveFromCart = (productId) => {
+    const updatedCartItems = cartItems.filter(item => item.id !== productId);
+    setCartItems(updatedCartItems);
   };
 
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
@@ -60,15 +73,18 @@ const Products = () => {
 
   return (
     <div className='w-full'>
-      <Search onSearchChange={handleSearchChange} /> {/* Adicionado onSearchChange */}
+      <Search onSearchChange={handleSearchChange} />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
         {filteredItems.map((product) => (
           <CardComponentQuantity 
             key={product.id} 
             productName={product.name} 
             productPrice={product.price} 
-            imageUrl={imageUrls.find((url, index) => index === product.id)} // Use o índice do array para encontrar a URL correspondente
-            onAddToCart={() => handleAddToCart(product)} // Adicionado onAddToCart
+            imageUrl={imageUrls.find((url, index) => index === product.id)}
+            onAddToCart={() => {
+              handleAddToCart(product);
+              setShowCart(true);
+            }} 
           />
         ))}
       </div>
@@ -77,7 +93,7 @@ const Products = () => {
         itemsPerPage={itemsPerPage} 
         onPageChange={handlePageChange} 
       />
-      {showCart && <CartComponent cartItems={cartItems} />} 
+      {showCart && <CartComponent cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />} 
     </div>
   );
 }

@@ -79,15 +79,25 @@ const FetchApi = {
     }
   },
 
-setCompanyProduct:async () => {
-  try {
-    const response = await axios.get(`${API_URL}/company/products/create`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-},
-
+  setCompanyProduct: async (accessToken, formData) => {
+    try {
+      const response = await axios.post(
+        `${API_URL}/company/products/create`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.status === 422) {
+        console.error("Error de validación:", error.response.data.errors);
+      }
+      throw error;
+    }
+  },
   
 };
 

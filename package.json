@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-hook/media-query": "^1.1.1",
+=======
+    "axios": "^1.6.7",
+>>>>>>> a9c72e1bf0c5d4eb6945333146501f41bce39446
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-paginate": "^8.2.0",

@@ -23,7 +23,7 @@ const ProductDescription = () => {
   };
 
   return (
-    <div className="flex flex-col w-[90%] m-auto lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 p-4 text-black">
+    <div className="flex flex-col w-[90%] mx-auto my-4 lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 p-4 text-black">
       <div className="bg-white shadow-md p-4 lg:p-10 rounded-md lg:w-1/2">
         <img
           src={Tomate}

@@ -5,12 +5,15 @@ import CardComponentQuantity from '../components/card-component/CardComponentQua
 import ImageApi from '../services/ImageApi';
 import FetchApi from '../services/FetchApi';
 import { useParams } from 'react-router-dom'; 
+import CartComponent from '../components/cart-component/CartComponent';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [imageUrls, setImageUrls] = useState([]); // Adicionado estado para as URLs das imagens
   const [currentPage, setCurrentPage] = useState(0);
   const [searchText, setSearchText] = useState(''); // Estado para armazenar o texto de pesquisa
+  const [showCart, setShowCart] = useState(false); // Estado para controlar a visibilidade do carrinho
+  const [cartItems, setCartItems] = useState([]); // Estado para armazenar os itens do carrinho
   const itemsPerPage = 8;
   const { id: categoryId } = useParams(); 
 
@@ -40,6 +43,11 @@ const Products = () => {
     setSearchText(event.target.value);
   };
 
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product]);
+    setShowCart(true); // Mostrar o carrinho ao adicionar um item
+  };
+
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
@@ -60,6 +68,7 @@ const Products = () => {
             productName={product.name} 
             productPrice={product.price} 
             imageUrl={imageUrls.find((url, index) => index === product.id)} // Use o índice do array para encontrar a URL correspondente
+            onAddToCart={() => handleAddToCart(product)} // Adicionado onAddToCart
           />
         ))}
       </div>
@@ -68,6 +77,7 @@ const Products = () => {
         itemsPerPage={itemsPerPage} 
         onPageChange={handlePageChange} 
       />
+      {showCart && <CartComponent cartItems={cartItems} />} 
     </div>
   );
 }

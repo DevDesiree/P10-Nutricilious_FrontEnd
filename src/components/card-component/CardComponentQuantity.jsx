@@ -1,17 +1,27 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
 
-const CardComponentQuantity = ({ productName, productPrice, imageUrl, onAddToCart }) => {
+const CardComponentQuantity = ({ productName, productPrice, imageUrl, productId, onAddToCart }) => {
     const [quantity, setQuantity] = useState(1);
+    const navigate = useNavigate(); 
 
     const increaseQuantity = () => {
         setQuantity(quantity + 1);
+        // Adicionar ao carrinho quando o usuário aumentar a quantidade
+        onAddToCart({ id: productId, name: productName, price: productPrice, quantity: quantity + 1 });
     };
 
     const decreaseQuantity = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
+            // Adicionar ao carrinho quando o usuário diminuir a quantidade
+            onAddToCart({ id: productId, name: productName, price: productPrice, quantity: quantity - 1 });
         }
+    };
+
+    const handleViewDetails = () => {
+        navigate(`/product/${productId}`);
     };
 
     return (
@@ -27,7 +37,7 @@ const CardComponentQuantity = ({ productName, productPrice, imageUrl, onAddToCar
                 <div className="flex justify-between items-center">
                     <div className="flex items-center justify-between">
                         <button
-                            onClick={onAddToCart}
+                            onClick={handleViewDetails}
                             type="button"
                             className="focus:outline-none text-gray bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                         >
@@ -63,7 +73,8 @@ CardComponentQuantity.propTypes = {
     productName: PropTypes.string.isRequired,
     productPrice: PropTypes.string.isRequired,
     imageUrl: PropTypes.string.isRequired,
-    onAddToCart: PropTypes.func.isRequired, // Adicionado onAddToCart como propriedade
+    productId: PropTypes.number.isRequired,
+    onAddToCart: PropTypes.func.isRequired,
 };
 
 export default CardComponentQuantity;

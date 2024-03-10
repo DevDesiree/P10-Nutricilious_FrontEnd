@@ -6,16 +6,17 @@ export default function NavbarComponent() {
 <nav className="bg-black border-black-200 dark:bg-black-900">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5 space-x-10">
     <div>
-        <a href="" className="flex items-center space-x-5 rtl:space-x-reverse">
+        <a href="/home" className="flex items-center space-x-5 rtl:space-x-reverse">
       <img src={logoNavbar} className="h-20" alt="Logo" />
       <span className="self-center text-4xl font-semibold whitespace-nowrap text-white ">Nutrilicious</span>
         </a>
   </div>
   <div className="flex-row justify-between space-x-5">
     
-  <a href="/login"> <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Iniciar Sesión</button> </a>
+    <a href="/login"><button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Iniciar Sesión</button> </a>
       <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Cerrar sesión</button>
-      <a href="/register"> <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Registrarse</button></a>
+      <a href="/register"><button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Registrarse</button></a>
+      <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">🛒</button>
 
       <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">
         <span className="sr-only">Open main menu</span>

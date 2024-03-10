@@ -2,12 +2,12 @@ import { useState, useEffect } from 'react';
 import Pagination from '../components/pagination/Pagination';
 import Search from '../components/search/Search';
 import CardComponentQuantity from '../components/card-component/CardComponentQuantity';
-import ImageApi from '../services/ImageApi';
 import FetchApi from '../services/FetchApi';
 import { useParams } from 'react-router-dom'; 
 import CartComponent from '../components/cart-component/CartComponent';
+import NavbarComponentShop from '../components/navbar-component/NavbarComponentShop';
 
-const Products = () => {
+const Products = ({ categoryId }) => {
   const [products, setProducts] = useState([]);
   const [imageUrls, setImageUrls] = useState([]); 
   const [currentPage, setCurrentPage] = useState(0);
@@ -18,13 +18,11 @@ const Products = () => {
   const { id: categoryId } = useParams(); 
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchProducts = async () => {
       try {
-        // Obtenha os dados dos produtos
-        const productsData = await FetchApi.getProductsByCategory(parseInt(categoryId));
+        const productsData = await FetchApi.getProducts();
         setProducts(productsData);
 
-        // Obtenha as URLs das imagens
         const fruitImageUrls = await ImageApi.fetchFruitsImages('fruits');
         setImageUrls(fruitImageUrls);
       } catch (error) {
@@ -32,50 +30,14 @@ const Products = () => {
       }
     };
 
-    fetchData();
-  }, [categoryId]); 
-
-  const handlePageChange = (selectedPage) => {
-    setCurrentPage(selectedPage);
-  };
-
-  const handleSearchChange = (event) => {
-    setSearchText(event.target.value);
-  };
-
-  const handleAddToCart = (productId, quantity) => {
-    const existingProductIndex = cartItems.findIndex(item => item.id === productId);
-
-    if (existingProductIndex !== -1) {
-        const updatedCartItems = [...cartItems];
-        updatedCartItems[existingProductIndex].quantity += quantity;
-        setCartItems(updatedCartItems);
-    } else {
-        setCartItems([...cartItems, { id: productId, quantity }]);
-    }
-    setShowCart(true);
-};
-
-  const handleRemoveFromCart = (productId) => {
-    const updatedCartItems = cartItems.filter(item => item.id !== productId);
-    setCartItems(updatedCartItems);
-  };
-
-  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-
-  // Filtrar os produtos com base no texto de pesquisa
-  const filteredItems = searchText.trim() === '' ? currentItems : currentItems.filter(
-    (product) =>
-      product.name.toLowerCase().includes(searchText.toLowerCase())
-  );
+    fetchProducts();
+  }, []);
 
   return (
     <div className='w-full'>
       <Search onSearchChange={handleSearchChange} />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
-        {filteredItems.map((product) => (
+        {products.map((product, index) => (
           <CardComponentQuantity 
             key={product.id} 
             productName={product.name} 
@@ -88,12 +50,7 @@ const Products = () => {
           />
         ))}
       </div>
-      <Pagination 
-        totalItems={products.length} 
-        itemsPerPage={itemsPerPage} 
-        onPageChange={handlePageChange} 
-      />
-      {showCart && <CartComponent cartItems={cartItems} onRemoveFromCart={handleRemoveFromCart} />} 
+      <Pagination itemsPerPage={4} itemOffset={itemOffset} setItemOffset={setItemOffset} />
     </div>
   );
 }

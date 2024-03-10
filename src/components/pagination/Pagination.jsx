@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 
+<<<<<<< HEAD
 function Pagination({ totalItems, itemsPerPage, onPageChange }) {
   const pageCount = Math.ceil(totalItems / itemsPerPage);
+=======
+
+>>>>>>> 60a7b4711fdfdb3f4cc0f6757aa709b5b0eb7619
 
   const handlePageClick = (selectedPage) => {
     onPageChange(selectedPage.selected);

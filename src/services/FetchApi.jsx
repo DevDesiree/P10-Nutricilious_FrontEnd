@@ -4,6 +4,16 @@ import axios from 'axios';
 const API_URL = 'http://127.0.0.1:8000/api';
 
 const FetchApi = {
+
+  login: async (credentials) => {
+    try {
+      const response = await axios.post(`${API_URL}/login`, credentials);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // Llamar AdminProductsController@index
   getProducts: async () => {
     try {
@@ -69,6 +79,7 @@ const FetchApi = {
     }
   },
 
+<<<<<<< HEAD
   getProductsByCategory: async (id) => {
     try {
       const response = await axios.get(`${API_URL}/products/category/${id}`);
@@ -77,6 +88,18 @@ const FetchApi = {
       throw error;
     }
   },
+=======
+  getProductsByCategory: async (id_category) => {
+    try {
+      const response = await axios.get(`${API_URL}/products/category/${id_category}`);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar produtos por categoria:', error);
+      return null;
+    }
+  }
+  
+>>>>>>> 60a7b4711fdfdb3f4cc0f6757aa709b5b0eb7619
 };
 
 export default FetchApi;

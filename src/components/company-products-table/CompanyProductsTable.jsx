@@ -1,229 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
+import FetchApi from "../../services/FetchApi";
 
 const CompanyProductsTable = () => {
   const itemsPerPage = 6;
-  const productsData = [
-    {
-      id: 1,
-      name: "Producto 1",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 2,
-      name: "Producto 2",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 3,
-      name: "Producto 3",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 4,
-      name: "Producto 4",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 5,
-      name: "Producto 5",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 6,
-      name: "Producto 6",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 7,
-      name: "Producto 7",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 8,
-      name: "Producto 8",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 9,
-      name: "Producto 9",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 10,
-      name: "Producto 10",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 11,
-      name: "Producto 11",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 12,
-      name: "Producto 12",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 13,
-      name: "Producto 13",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 14,
-      name: "Producto 14",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 15,
-      name: "Producto 15",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 16,
-      name: "Producto 10",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 17,
-      name: "Producto 11",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 18,
-      name: "Producto 12",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 19,
-      name: "Producto 13",
-      price: 10.99,
-      stock: 20,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
-    {
-      id: 20,
-      name: "Producto 14",
-      price: 15.99,
-      stock: 15,
-      status: "Inactive",
-      category: "Ropa",
-      companyId: 2,
-    },
-    {
-      id: 21,
-      name: "Producto 15",
-      price: 25.99,
-      stock: 30,
-      status: "Active",
-      category: "Electrónicos",
-      companyId: 1,
-    },
 
-    // Agrega más datos según sea necesario
-  ];
-
-  const companies = [
-    { id: 1, name: "Empresa A" },
-    { id: 2, name: "Empresa B" },
-    // Agrega más empresas según sea necesario
-  ];
-
-  const [currentPage, setCurrentPage] = useState(0);
-  const [selectedCompany, setSelectedCompany] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [productNameFilter, setProductNameFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(0);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleCompanyChange = (event) => {
-    const companyId = parseInt(event.target.value, 10);
-    setSelectedCompany(companyId === 0 ? null : companyId);
-    setCurrentPage(0); // Reiniciar la página cuando cambia la empresa
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("Selected Category:", selectedCategory);
+      try {
+        // Obtener productos
+        const accessToken = localStorage.getItem("token");
+        const companyProducts = await FetchApi.getCompanyProducts(accessToken);
+        console.log("Company Products:", companyProducts);
+        setProducts(companyProducts);
 
-  const handleCategoryChange = (event) => {
-    const category = event.target.value;
-    setSelectedCategory(category === "Todas" ? null : category);
-    setCurrentPage(0); // Reiniciar la página cuando cambia la categoría
-  };
+        // Obtener categorías
+        const fetchedCategories = await FetchApi.getCategories();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        console.error("Error al obtener datos:", error);
+        setErrorMessage(
+          "Error al obtener datos. Por favor, inténtalo de nuevo más tarde."
+        );
+      }
+    };
 
-  const filteredProducts = productsData.filter(
+    fetchData();
+  }, []);
+
+  const filteredProducts = products.filter(
     (product) =>
-      (!selectedCompany || product.companyId === selectedCompany) &&
-      (!selectedCategory || product.category === selectedCategory)
+      (selectedCategory === null ||
+        selectedCategory === "" ||
+        product.id_category == selectedCategory) &&
+      (!productNameFilter ||
+        product.name.toLowerCase().includes(productNameFilter.toLowerCase()))
   );
 
   const offset = currentPage * itemsPerPage;
@@ -233,6 +53,7 @@ const CompanyProductsTable = () => {
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
+    console.log("Filtered Products:", filteredProducts);
   };
 
   // Función para eliminar un producto
@@ -247,27 +68,46 @@ const CompanyProductsTable = () => {
       <h2 className="text-black text-2xl font-bold mb-4">
         Listado de Productos
       </h2>
-      <div className="flex justify-between space-x-4 mb-4">
-        <select
-          onChange={handleCompanyChange}
-          value={selectedCompany || 0}
-          className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+      <div className="flex flex-wrap justify-between space-x-4 mb-4">
+        <div className="flex flex-wrap gap-3">
+          <select
+            onChange={(e) => {
+              console.log(e.target.value); // Esto imprimirá el category.id seleccionado
+              setSelectedCategory(e.target.value);
+            }}
+            value={selectedCategory || "Todas"}
+            className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+          >
+            <option value="">Todas las Categorías</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            placeholder="Filtrar por nombre"
+            value={productNameFilter}
+            onChange={(e) => setProductNameFilter(e.target.value)}
+            className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+          />
+        </div>
+        <Link
+          to={`/company/create`}
+          className="mt-4 ml-[1%] bg-yellow-400 text-black py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"
         >
-          <option value={0}>Todas las Empresas</option>
-          {companies.map((company) => (
-            <option key={company.id} value={company.id}>
-              {company.name}
-            </option>
-          ))}
-        </select>
-        <Link to={`/company/create`} className="mt-4 ml-[1%] bg-yellow-400 text-black py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"> <i className="fa fa-plus-circle" aria-hidden="true"></i> Crear Producto </Link>
+          {" "}
+          <i className="fa fa-plus-circle" aria-hidden="true"></i> Crear
+          Producto{" "}
+        </Link>
       </div>
       <div className="overflow-x-auto shadow-sm rounded-xl">
         <table className="w-full text-sm text-left bg-white dark:bg-gray-800 border dark:border-gray-700 ">
           <thead className="text-md text-white bg-black ">
             <tr>
               <th className="px-4 py-2">Nombre del Producto</th>
-              <th className="px-4 py-2">Nombre de la Compañía</th>
+              <th className="px-4 py-2">Categoria</th>
               <th className="px-4 py-2">Estado</th>
               <th className="px-4 py-2">Precio</th>
               <th className="px-4 py-2">Acciones</th>
@@ -281,8 +121,9 @@ const CompanyProductsTable = () => {
               >
                 <td className="px-4 py-2">{product.name}</td>
                 <td className="px-4 py-2">
-                  {companies.find((company) => company.id === product.companyId)
-                    ?.name || "Desconocida"}
+                  {categories.find(
+                    (category) => category.id === product.id_category
+                  )?.name || "Desconocida"}
                 </td>
                 <td className="px-4 py-2">{product.status}</td>
                 <td className="px-4 py-2">{product.price}</td>

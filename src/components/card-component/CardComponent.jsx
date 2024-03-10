@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const CardComponent = ({ category, description, imageUrl }) => {
   return (
-    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full"> {/* Defina uma altura fixa para o card usando a classe 'h-full' */}
       <a href="#">
         <img className="rounded-t-lg w-full h-48 object-cover" src={imageUrl} alt={category.name} />
       </a>

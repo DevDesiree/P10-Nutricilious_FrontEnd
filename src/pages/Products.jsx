@@ -1,91 +1,73 @@
-<<<<<<< HEAD
-import Pagination from '../components/pagination/Pagination'
-import Search from '../components/search/Search'
-import CardComponentQuantity from '../components/card-component/CardComponentQuantity';
-import { useState } from 'react';
-import { useMediaQuery } from '@react-hook/media-query';
-
-const Products = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const isXl = useMediaQuery('(min-width: 1280px)');
-  const itemsPerPage = isXl ? 8 : 4; // Número de itens por página
-
-  const totalItems = 14; // Número total de itens (no seu caso, a quantidade total de cards)
-
-  // Calcula o índice inicial e final dos itens a serem exibidos na página atual
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-=======
-/* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import Pagination from '../components/pagination/Pagination';
 import Search from '../components/search/Search';
 import CardComponentQuantity from '../components/card-component/CardComponentQuantity';
 import ImageApi from '../services/ImageApi';
-import { useLocation } from 'react-router-dom'; // Importe useLocation para obter o ID da categoria na URL
+import FetchApi from '../services/FetchApi';
+import { useParams } from 'react-router-dom'; 
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [imageUrls, setImageUrls] = useState([]);
-  const [categoryId, setCategoryId] = useState(null); // Estado para armazenar o ID da categoria selecionada
-  const location = useLocation(); // Hook useLocation para obter o ID da categoria na URL
+  const [imageUrls, setImageUrls] = useState([]); // Adicionado estado para as URLs das imagens
+  const [currentPage, setCurrentPage] = useState(0);
+  const [searchText, setSearchText] = useState(''); // Estado para armazenar o texto de pesquisa
+  const itemsPerPage = 8;
+  const { id: categoryId } = useParams(); 
 
   useEffect(() => {
-    const fetchImageUrls = async () => {
+    const fetchData = async () => {
       try {
-        // Obter as URLs das imagens usando o serviço ImageApi
+        // Obtenha os dados dos produtos
+        const productsData = await FetchApi.getProductsByCategory(parseInt(categoryId));
+        setProducts(productsData);
+
+        // Obtenha as URLs das imagens
         const fruitImageUrls = await ImageApi.fetchFruitsImages('fruits');
         setImageUrls(fruitImageUrls);
       } catch (error) {
-        console.error('Erro ao buscar imagens:', error);
+        console.error('Erro ao buscar dados:', error);
       }
     };
 
-    fetchImageUrls();
-  }, []);
+    fetchData();
+  }, [categoryId]); 
 
-  useEffect(() => {
-    // Obtenha o ID da categoria da URL quando a localização for alterada
-    const searchParams = new URLSearchParams(location.search);
-    const categoryIdParam = searchParams.get('categoryId');
-    setCategoryId(categoryIdParam);
-  }, [location.search]);
->>>>>>> a9c72e1bf0c5d4eb6945333146501f41bce39446
+  const handlePageChange = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchText(event.target.value);
+  };
+
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
+
+  // Filtrar os produtos com base no texto de pesquisa
+  const filteredItems = searchText.trim() === '' ? currentItems : currentItems.filter(
+    (product) =>
+      product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <div className='w-full'>
-      <Search />
+      <Search onSearchChange={handleSearchChange} /> {/* Adicionado onSearchChange */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
-<<<<<<< HEAD
-        {Array.from({ length: itemsPerPage }).map((_, index) => {
-          const itemIndex = indexOfFirstItem + index;
-          return <CardComponentQuantity key={itemIndex} />;
-        })}
+        {filteredItems.map((product) => (
+          <CardComponentQuantity 
+            key={product.id} 
+            productName={product.name} 
+            productPrice={product.price} 
+            imageUrl={imageUrls.find((url, index) => index === product.id)} // Use o índice do array para encontrar a URL correspondente
+          />
+        ))}
       </div>
-      <Pagination
-        itemsPerPage={itemsPerPage}
-        totalItems={totalItems}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
+      <Pagination 
+        totalItems={products.length} 
+        itemsPerPage={itemsPerPage} 
+        onPageChange={handlePageChange} 
       />
-=======
-        {products
-          .filter(product => product.categoryId === categoryId) // Filtra os produtos pela categoria selecionada
-          .map((product) => (
-            <CardComponentQuantity 
-              key={product.id} 
-              productName={product.name} 
-              productPrice={product.price} 
-              imageUrl={imageUrls.find((url, index) => index === product.id)} // Encontre a URL da imagem correspondente ao ID do produto
-            />
-          ))}
-      </div>
-      <Pagination itemsPerPageOptions={[8, 16, 24]} categoryId={categoryId} />
->>>>>>> a9c72e1bf0c5d4eb6945333146501f41bce39446
     </div>
   );
 }

@@ -68,6 +68,17 @@ const FetchApi = {
       throw error;
     }
   },
+
+  getProductsByCategory: async (id_category) => {
+    try {
+      const response = await axios.get(`${API_URL}/products/category/${id_category}`);
+      return response.data;
+    } catch (error) {
+      console.error('Erro ao buscar produtos por categoria:', error);
+      return null;
+    }
+  }
+  
 };
 
 export default FetchApi;

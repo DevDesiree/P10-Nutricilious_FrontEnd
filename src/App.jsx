@@ -1,4 +1,3 @@
-import React from "react";
 import Router from "./configuration/Router.jsx";
 import FooterComponent from "./components/footer-component/FooterComponent.jsx";
 import "./App.css";

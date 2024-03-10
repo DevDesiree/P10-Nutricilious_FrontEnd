@@ -14,6 +14,7 @@ export default function NavbarComponent() {
   <div className="flex-row justify-between space-x-5">
     
       <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">Cerrar sesión</button>
+
       <button type="button" className="text-black bg-amber-400 hover:bg-amber-400 focus:ring-4 focus:outline-none focus:ring-amber-400 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-amber-100 dark:hover:bg-amber-400 dark:focus:ring-amber-400">🛒</button>
 
       <button data-collapse-toggle="navbar-cta" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-cta" aria-expanded="false">

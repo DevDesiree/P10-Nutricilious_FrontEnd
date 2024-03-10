@@ -4,6 +4,7 @@ import Search from '../components/search/Search';
 import CardComponentQuantity from '../components/card-component/CardComponentQuantity';
 import FetchApi from '../services/FetchApi';
 import ImageApi from '../services/ImageApi';
+import NavbarComponentShop from '../components/navbar-component/NavbarComponentShop';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -28,6 +29,7 @@ const Products = () => {
 
   return (
     <div className='w-full'>
+      <NavbarComponentShop/>
       <Search />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
         {products.map((product, index) => (

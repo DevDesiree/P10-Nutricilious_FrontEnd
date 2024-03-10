@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import CardComponent from "../components/card-component/CardComponent";
-import CarouselBasicExample from "../components/banner/Banner.jsx"
+import CarouselBasicExample from "../components/banner/Banner.jsx";
+import NavbarComponent from '../components/navbar-component/NavbarComponent.jsx';
 import Search from "../components/search/Search.jsx";
 import FetchApi from '../services/FetchApi';
 import avocadoYtomate from '../assets/images/avocadoYTomate.jpg';
@@ -53,7 +54,8 @@ const Home = () => {
   
 
   return (
-    <>    
+    <>  
+    <NavbarComponent/> 
     <CarouselBasicExample/>
     <Search/>
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">

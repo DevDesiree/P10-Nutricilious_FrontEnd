@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const CardComponentQuantity = ({ productName, productPrice, imageUrl }) => {
+const CardComponentQuantity = ({ productName, productPrice, imageUrl, onButtonClick }) => {
     const [quantity, setQuantity] = useState(1);
 
     const increaseQuantity = () => {
@@ -13,6 +13,10 @@ const CardComponentQuantity = ({ productName, productPrice, imageUrl }) => {
             setQuantity(quantity - 1);
         }
     };
+
+    const handleClick = () => {
+        onButtonClick();
+      };
 
     return (
         <div className="max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -27,6 +31,7 @@ const CardComponentQuantity = ({ productName, productPrice, imageUrl }) => {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center justify-between">
                         <a
+                            onClick={handleClick}
                             type="button"
                             href="#"
                             className="focus:outline-none text-gray bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"

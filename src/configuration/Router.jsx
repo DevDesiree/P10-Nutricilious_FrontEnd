@@ -15,9 +15,10 @@ export default function Router() {
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<Home/>}></Route> 
+        <Route path="/products/:id" element={<Products/>}></Route>
         <Route path="/product" element={<Product/>}></Route> 
         {/* <Route path="/cart" element={<Cart/>}></Route>  */}
-        <Route path="/products" element={<Products></Products>}></Route>
+     
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         

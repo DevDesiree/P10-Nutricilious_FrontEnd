@@ -68,6 +68,15 @@ const FetchApi = {
       throw error;
     }
   },
+
+  getProductsByCategory: async (id) => {
+    try {
+      const response = await axios.get(`${API_URL}/products/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default FetchApi;

@@ -8,6 +8,7 @@ import ImageApi from '../services/ImageApi';
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -15,7 +16,6 @@ const Products = () => {
         const productsData = await FetchApi.getProducts();
         setProducts(productsData);
 
-        // Obter as URLs das imagens usando o serviço ImageApi
         const fruitImageUrls = await ImageApi.fetchFruitsImages('fruits');
         setImageUrls(fruitImageUrls);
       } catch (error) {
@@ -30,7 +30,7 @@ const Products = () => {
     <div className='w-full'>
       <Search />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
-        {products.map((product, index)=> (
+        {products.map((product, index) => (
           <CardComponentQuantity 
             key={product.id} 
             productName={product.name} 
@@ -39,7 +39,7 @@ const Products = () => {
           />
         ))}
       </div>
-      <Pagination itemsPerPage={4} />
+      <Pagination itemsPerPage={4} itemOffset={itemOffset} setItemOffset={setItemOffset} />
     </div>
   );
 }

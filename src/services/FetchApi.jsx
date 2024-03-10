@@ -68,6 +68,10 @@ const FetchApi = {
       throw error;
     }
   },
+
+
+
+  
 };
 
 export default FetchApi;

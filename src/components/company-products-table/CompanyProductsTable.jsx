@@ -9,6 +9,7 @@ const CompanyProductsTable = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [productNameFilter, setProductNameFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
 
@@ -38,9 +39,13 @@ const CompanyProductsTable = () => {
 
   const filteredProducts = products.filter(
     (product) =>
-      selectedCategory === null || selectedCategory === "" || product.id_category == selectedCategory
+      (selectedCategory === null ||
+        selectedCategory === "" ||
+        product.id_category == selectedCategory) &&
+      (!productNameFilter ||
+        product.name.toLowerCase().includes(productNameFilter.toLowerCase()))
   );
-  
+
   const offset = currentPage * itemsPerPage;
   const currentProducts = filteredProducts.slice(offset, offset + itemsPerPage);
 
@@ -63,22 +68,31 @@ const CompanyProductsTable = () => {
       <h2 className="text-black text-2xl font-bold mb-4">
         Listado de Productos
       </h2>
-      <div className="flex justify-between space-x-4 mb-4">
-        <select
-          onChange={(e) => {
-            console.log(e.target.value); // Esto imprimirá el category.id seleccionado
-            setSelectedCategory(e.target.value);
-          }}
-          value={selectedCategory || "Todas"}
-          className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
-        >
-          <option value="">Todas las Categorías</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
+      <div className="flex flex-wrap justify-between space-x-4 mb-4">
+        <div className="flex flex-wrap gap-3">
+          <select
+            onChange={(e) => {
+              console.log(e.target.value); // Esto imprimirá el category.id seleccionado
+              setSelectedCategory(e.target.value);
+            }}
+            value={selectedCategory || "Todas"}
+            className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+          >
+            <option value="">Todas las Categorías</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <input
+            type="text"
+            placeholder="Filtrar por nombre"
+            value={productNameFilter}
+            onChange={(e) => setProductNameFilter(e.target.value)}
+            className="p-2 border rounded bg-white dark:bg-gray-800 dark:border-gray-700"
+          />
+        </div>
         <Link
           to={`/company/create`}
           className="mt-4 ml-[1%] bg-yellow-400 text-black py-2 px-4 rounded-xl text-center hover:bg-yellow-500 focus:outline-none focus:ring focus:border-yellow-600 self-end"

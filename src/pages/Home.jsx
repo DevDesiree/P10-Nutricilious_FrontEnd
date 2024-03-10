@@ -54,7 +54,7 @@ const Home = () => {
   };
 
   const handleCategoryClick = (categoryId) => {
-    navigate(`/products/${categoryId}`);
+    navigate(`/products/category/${categoryId}`);
   };
 
   return (

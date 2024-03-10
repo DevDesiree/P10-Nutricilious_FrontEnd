@@ -1,22 +1,21 @@
 import { useState, useEffect } from 'react';
-import Pagination from '../components/pagination/Pagination';
-import Search from '../components/search/Search';
-import CardComponentQuantity from '../components/card-component/CardComponentQuantity';
 import FetchApi from '../services/FetchApi';
 import ImageApi from '../services/ImageApi';
 import NavbarComponentShop from '../components/navbar-component/NavbarComponentShop';
 
-const Products = () => {
+const Products = ({ categoryId }) => {
   const [products, setProducts] = useState([]);
   const [imageUrls, setImageUrls] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductsByCategory = async () => {
       try {
-        const productsData = await FetchApi.getProducts();
+        // Obtém os produtos relacionados ao ID da categoria clicada
+        const productsData = await FetchApi.getProductsByCategory(categoryId);
         setProducts(productsData);
 
+        // Obter as URLs das imagens usando o serviço ImageApi
         const fruitImageUrls = await ImageApi.fetchFruitsImages('fruits');
         setImageUrls(fruitImageUrls);
       } catch (error) {
@@ -24,15 +23,14 @@ const Products = () => {
       }
     };
 
-    fetchProducts();
-  }, []);
+    fetchProductsByCategory();
+  }, [categoryId]); // Executa sempre que o categoryId mudar
 
   return (
     <div className='w-full'>
-      <NavbarComponentShop/>
       <Search />
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
-        {products.map((product, index) => (
+        {products.map((product, index)=> (
           <CardComponentQuantity 
             key={product.id} 
             productName={product.name} 
@@ -41,7 +39,7 @@ const Products = () => {
           />
         ))}
       </div>
-      <Pagination itemsPerPage={4} itemOffset={itemOffset} setItemOffset={setItemOffset} />
+      <Pagination itemsPerPage={4} />
     </div>
   );
 }

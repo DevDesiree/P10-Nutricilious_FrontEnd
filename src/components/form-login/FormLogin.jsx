@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const FormLogin = () => {
+    const navigate = useNavigate();
     const [credentials, setCredentials] = useState({
         email: '',
         password: '',
     });
+
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setCredentials({
@@ -16,26 +20,56 @@ const FormLogin = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        console.log('Datos del formulario:', credentials);
-
+    
+        //console.log('Datos del formulario:', credentials);
+    
         axios.post('http://localhost:8000/api/login', credentials)
             .then(response => {
-                // Manejar la respuesta después de iniciar sesión correctamente
-                console.log(response.data);
+                const { token, rol } = response.data;
+    
+                // Almacena el token y el rol en localStorage
+                localStorage.setItem('token', token);
+                localStorage.setItem('rol', rol);
+    
+                // Redirige al usuario según su rol
+                switch (rol) {
+                    case 'Admin':
+                       navigate('/company/products');
+                        break;
+                    case 'User':
+                       navigate('/products');
+                        break;
+                    case 'Company':
+                       navigate('/products');
+                        break;
+                    default:
+                        console.log('Rol no reconocido');
+                }
             })
             .catch(error => {
-                // Manejar errores de inicio de sesión
                 if (error.response && error.response.status === 422) {
-                    // Acceder a los errores de validación específicos del servidor
+                    // Manejar errores de validación específicos del servidor
                     console.log('Errores de validación:', error.response.data.errors);
+                } else if (error.response && error.response.status === 500) {
+                    // Manejar errores internos del servidor de manera más amigable
+                    setErrorMessage('Error interno del servidor. Por favor, inténtalo de nuevo más tarde.');
+                } else if (error.response && error.response.status === 401) {
+                    // Manejar el caso de credenciales incorrectas
+                    setErrorMessage('Correo electrónico o contraseña incorrectos. Por favor, verifica tus credenciales.');
                 } else {
+                    // Otros errores
                     console.error(error);
                 }
             });
     };
+    
 
     return (
+        <div>
+             {errorMessage && (
+                <div className="text-red-700 bg-red-300 p-3 rounded">{errorMessage}</div>
+            )}
+        
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto rounded-lg p-6 bg-white shadow-2xl sm:rounded-3xl dark:border-gray-600 my-7">
             <h1 className="block mb-2 text-center text-2xl font-medium text-gray-900">Inicia Sesión</h1>
             <div className="mb-5 ">
@@ -65,6 +99,7 @@ const FormLogin = () => {
                 </button>
             </div>
         </form>
+        </div>
     )
 }
 

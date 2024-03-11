@@ -57,24 +57,30 @@ const CompanyProductsTable = () => {
 
   // Función para eliminar un producto
   const deleteProduct = async (id) => {
-    try {
-      // Obtener el token de autenticación
-      const token = localStorage.getItem("token");
-
-      // Enviar solicitud de eliminación al servidor
-      await FetchApi.deleteCompanyProduct(token, id);
-
-      // Actualizar la lista de productos después de la eliminación
-      setProducts((prevProducts) =>
-        prevProducts.filter((product) => product.id !== id)
-      );
-
-      console.log(`Producto con ID ${id} eliminado con éxito`);
-    } catch (error) {
-      console.error(`Error al eliminar el producto con ID ${id}:`, error);
-      // Puedes agregar lógica adicional para manejar errores si es necesario
+    // Mostrar alerta de confirmación
+    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
+  
+    if (confirmDelete) {
+      try {
+        // Obtener el token de autenticación
+        const token = localStorage.getItem("token");
+  
+        // Enviar solicitud de eliminación al servidor
+        await FetchApi.deleteCompanyProduct(token, id);
+  
+        // Actualizar la lista de productos después de la eliminación
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== id)
+        );
+  
+        console.log(`Producto con ID ${id} eliminado con éxito`);
+      } catch (error) {
+        console.error(`Error al eliminar el producto con ID ${id}:`, error);
+        // Puedes agregar lógica adicional para manejar errores si es necesario
+      }
     }
   };
+  
 
   return (
     <div className="my-4 mx-auto py-3 px-8 w-[80%] bg-white shadow-2xl dark:bg-black dark:text-white rounded-md">

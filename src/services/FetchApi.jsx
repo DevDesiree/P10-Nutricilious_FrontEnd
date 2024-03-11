@@ -100,7 +100,7 @@ const FetchApi = {
   },
   updateCompanyProduct: async (id, data, token) => {
     try {
-      const response = await axios.put(`${API_URL}/company/products/${id}`, data, {
+      const response = await axios.put(`${API_URL}/company/products/update/${id}`, data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

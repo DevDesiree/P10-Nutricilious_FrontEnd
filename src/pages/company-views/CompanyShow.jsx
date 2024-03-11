@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const CompanyShow = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [productDetails, setProductDetails] = useState({
     name: "",
@@ -12,6 +13,10 @@ const CompanyShow = () => {
     description: "",
     status: "",
   });
+
+  const handleCancel = () => {
+    navigate("/company/products");
+  };
 
   useEffect(() => {
     console.log(id);
@@ -30,8 +35,7 @@ const CompanyShow = () => {
 
   return (
     <div className="max-w-3xl mx-auto rounded-lg p-6 bg-white shadow-xl sm:rounded-3xl dark:border-gray-600 my-7">
-      <h1 className="block mb-5 text-center text-2xl font-medium text-gray-900">
-        Detalles del Producto
+    <h1 className="text-center text-2xl font-medium text-gray-900 mb-5"> Detalles del Producto
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
@@ -75,6 +79,15 @@ const CompanyShow = () => {
           </label>
           <p>{productDetails.status}</p>
         </div>
+      </div>
+      <div className="flex justify-end mt-8">
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="bg-yellow-400 hover:bg-yellow-600 text-black font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none focus:ring focus:border-yellow-300"
+        >
+          Regresar
+        </button>
       </div>
     </div>
   );

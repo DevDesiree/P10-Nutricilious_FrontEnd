@@ -124,6 +124,20 @@ const FetchApi = {
       throw error;
     }
   },
+
+  deleteCompanyProduct: async (accessToken, productId) => {
+    try {
+      const response = await axios.delete(`${API_URL}/company/products/delete/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  
 };
 
 export default FetchApi;

@@ -12,15 +12,14 @@ const CompanyProductsTable = () => {
   const [productNameFilter, setProductNameFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Selected Category:", selectedCategory);
       try {
         // Obtener productos
         const accessToken = localStorage.getItem("token");
         const companyProducts = await FetchApi.getCompanyProducts(accessToken);
-        console.log("Company Products:", companyProducts);
         setProducts(companyProducts);
 
         // Obtener categorías
@@ -57,11 +56,31 @@ const CompanyProductsTable = () => {
   };
 
   // Función para eliminar un producto
-  const deleteProduct = (id) => {
-    // Implementa la lógica de eliminación aquí
-    // Puedes usar setProducts para actualizar la lista después de eliminar
-    console.log(`Eliminar producto con ID ${id}`);
+  const deleteProduct = async (id) => {
+    // Mostrar alerta de confirmación
+    const confirmDelete = window.confirm("¿Estás seguro de que quieres eliminar este producto?");
+  
+    if (confirmDelete) {
+      try {
+        // Obtener el token de autenticación
+        const token = localStorage.getItem("token");
+  
+        // Enviar solicitud de eliminación al servidor
+        await FetchApi.deleteCompanyProduct(token, id);
+  
+        // Actualizar la lista de productos después de la eliminación
+        setProducts((prevProducts) =>
+          prevProducts.filter((product) => product.id !== id)
+        );
+  
+        console.log(`Producto con ID ${id} eliminado con éxito`);
+      } catch (error) {
+        console.error(`Error al eliminar el producto con ID ${id}:`, error);
+        // Puedes agregar lógica adicional para manejar errores si es necesario
+      }
+    }
   };
+  
 
   return (
     <div className="my-4 mx-auto py-3 px-8 w-[80%] bg-white shadow-2xl dark:bg-black dark:text-white rounded-md">
@@ -72,7 +91,6 @@ const CompanyProductsTable = () => {
         <div className="flex flex-wrap gap-3">
           <select
             onChange={(e) => {
-              console.log(e.target.value); // Esto imprimirá el category.id seleccionado
               setSelectedCategory(e.target.value);
             }}
             value={selectedCategory || "Todas"}
@@ -129,13 +147,13 @@ const CompanyProductsTable = () => {
                 <td className="px-4 py-2">{product.price}</td>
                 <td className="px-4 py-2 flex flex-wrap gap-2">
                   <Link
-                    to={`/company/edit`}
+                    to={`/company/edit/${product.id}`}
                     className="font-medium text-yellow-500 hover:text-yellow-900"
                   >
                     <i className="fas fa-pencil-alt" aria-hidden="true"></i>
                   </Link>
                   <Link
-                    to={`/company/product`}
+                    to={`/company/product/${product.id}`}
                     className="font-medium text-gray-800 hover:text-gray-500"
                   >
                     <i className="fa fa-eye"></i>

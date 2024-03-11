@@ -141,13 +141,13 @@ const CompanyProductsTable = () => {
                 <td className="px-4 py-2">{product.price}</td>
                 <td className="px-4 py-2 flex flex-wrap gap-2">
                   <Link
-                    to={`/company/edit`}
+                    to={`/company/product/${product.id}`}
                     className="font-medium text-yellow-500 hover:text-yellow-900"
                   >
                     <i className="fas fa-pencil-alt" aria-hidden="true"></i>
                   </Link>
                   <Link
-                    to={`/company/product`}
+                    to={`/company/product/${product.id}`}
                     className="font-medium text-gray-800 hover:text-gray-500"
                   >
                     <i className="fa fa-eye"></i>

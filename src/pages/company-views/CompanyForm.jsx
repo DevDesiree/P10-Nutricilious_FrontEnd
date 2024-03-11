@@ -42,7 +42,6 @@ const CompanyForm = () => {
   };
 
   const handleCancel = () => {
-    // Redirigir al usuario a la misma vista
     navigate("/company/products");
   };
 
@@ -50,25 +49,24 @@ const CompanyForm = () => {
 const handleSubmit = async (e) => {
   e.preventDefault();
 
- // Verificar que los campos name, id_category y stock estén llenos antes de enviar la solicitud
+
  if (!formData.name || !formData.id_category || !formData.stock) {
   console.error("Los campos name, id_category y stock son obligatorios.");
   return;
 }
 
   try {
-    // Obtener el token de autenticación
+   
     const token = localStorage.getItem("token");
    
-    // Asegúrate de que el campo sea 'category' en lugar de 'id_category'
     await FetchApi.setCompanyProduct(token, {
       ...formData,
       id_category: formData.id_category,
     });
 
-    // Lógica adicional después de la creación (por ejemplo, redireccionar)
+   
     console.log("Producto creado con éxito");
-    // Limpiar el formulario
+    
     setFormData({
       name: "",
       id_category: "",
@@ -82,10 +80,10 @@ const handleSubmit = async (e) => {
   } catch (error) {
     if (error.response && error.response.status === 422) {
       console.error("Error de validación:", error.response.data.errors);
-      // Mostrar los errores en el formulario
+     
     } else if (error.response && error.response.status === 401) {
       console.error("Error de autenticación:", error.response.data);
-      // Manejar la falta de autorización (por ejemplo, redirigir a la página de inicio de sesión)
+      
     } else {
       console.error("Error al crear el producto:", error);
     }

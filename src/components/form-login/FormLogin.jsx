@@ -21,18 +21,16 @@ const FormLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Limpiar mensajes de error previos
+   
     setErrorMessage("");
     try {
         const response = await FetchApi.login(credentials);
   
         const { token, rol } = response;
   
-        // Almacena el token y el rol en localStorage
         localStorage.setItem('token', token);
         localStorage.setItem('rol', rol);
   
-        // Redirige al usuario según su rol
         switch (rol) {
           case 'Admin':
             navigate('/');
@@ -47,7 +45,7 @@ const FormLogin = () => {
             console.log('Rol no reconocido');
         }
       } catch (error) {
-        // Manejar errores y establecer mensajes de error
+     
         if (error.response && error.response.status === 401) {
           setErrorMessage('Correo electrónico o contraseña incorrectos. Por favor, verifica tus credenciales.');
         } else {

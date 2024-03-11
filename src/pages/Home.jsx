@@ -30,7 +30,7 @@ const Home = () => {
     fetchCategories();
   }, []);
 
-  // Defina as descrições para cada categoria
+  
   const categoryDescription = {
     category1: "Productos ricos en proteínas vegetales para una alimentación equilibrada y saludable.",
     category2: "Productos ricos en proteínas vegetales para una alimentación equilibrada y saludable.",

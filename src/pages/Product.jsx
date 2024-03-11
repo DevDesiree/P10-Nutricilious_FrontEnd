@@ -9,7 +9,7 @@ const Product = () => {
         <ProductDescription />
       </section>
 
-      {/* Banner */}
+      
       <div className="bg-yellow-400 text-center p-8 md:p-16 lg:p-20">
         <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-black">
           ¡Descubre nuestras recetas especiales y déjate inspirar!

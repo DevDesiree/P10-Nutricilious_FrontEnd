@@ -14,7 +14,7 @@ const FetchApi = {
     }
   },
 
-  // Llamar AdminProductsController@index
+ 
   getProducts: async () => {
     try {
       const response = await axios.get(`${API_URL}/products`);
@@ -24,7 +24,7 @@ const FetchApi = {
     }
   },
 
-  // Llamar AdminProductsController@show
+  
   getAdminProductById: async (id) => {
     try {
       const response = await axios.get(`${API_URL}/admin/products/${id}`);
@@ -34,7 +34,7 @@ const FetchApi = {
     }
   },
 
-  // Llamar CompanyProductsController@index
+ 
   getCompanyProducts: async (accessToken) => {
     try {
       const response = await axios.get(`${API_URL}/company/products`, {
@@ -48,7 +48,6 @@ const FetchApi = {
     }
   },
 
-  // llamar UserProductsController@addToCart
   addToCart: async (productId, productQuantity, accessToken) => {
     try {
       const response = await axios.post(
@@ -69,7 +68,7 @@ const FetchApi = {
     }
   },
 
-  // Llamar CompanyProductsController@store
+  
   getCategories: async () => {
     try {
       const response = await axios.get(`${API_URL}`);

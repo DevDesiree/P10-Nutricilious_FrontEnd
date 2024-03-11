@@ -23,7 +23,7 @@ const ProductDescription = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4  p-4">
+    <div className="flex flex-col w-[90%] mx-auto my-4 lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4 p-4 text-black">
       <div className="bg-white shadow-md p-4 lg:p-10 rounded-md lg:w-1/2">
         <img
           src={Tomate}
@@ -39,14 +39,18 @@ const ProductDescription = () => {
         <h3 className="text-md font-semibold mb-4 text-left">
           {product.category + " >" + " Fruta"}
         </h3>
-        <div className=" w-4/5 m-auto pt-5">
-          <h3 className="text-md font-semibold mb-4 text-left">Descripción</h3>
-          <p className="mb-4 text-left text-sm ">{product.description}</p>
+        <div className=" flex flex-col w-4/5 m-auto pt-5">
+          <div className="">
+            <h3 className="text-md font-semibold mb-4 text-left">
+              Descripción
+            </h3>
+            <p className="mb-4 text-left text-sm ">{product.description}</p>
+          </div>
           <div className="flex justify-between mt-4 pt-5">
             <p className="text-lg font-bold">
               {product.price.toFixed(2) + " €/ud"}
             </p>
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center space-x-2">
               <div className="flex items-center space-x-2">
                 <button
                   onClick={decrementQuantity}

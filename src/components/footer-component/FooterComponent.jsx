@@ -18,7 +18,7 @@ const FooterComponent = () => {
                         </a>
                     </div>
 
-                    <div className="flex flex-wrap justify-center mx-auto mt-2 text-sm">
+                    <div className="flex flex-wrap justify-center mx-auto text-sm mb-2">
                         <a href="https://www.somosf5.org/" className="hover:text-amber-400 text-gray-50 me-4">
                             <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path

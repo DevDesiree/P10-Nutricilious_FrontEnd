@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
+import { useNavigate } from "react-router-dom";
 
 const CompanyForm = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -39,7 +41,11 @@ const CompanyForm = () => {
     });
   };
 
-  // ...
+  const handleCancel = () => {
+    // Redirigir al usuario a la misma vista
+    navigate("/company/products");
+  };
+
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -53,9 +59,7 @@ const handleSubmit = async (e) => {
   try {
     // Obtener el token de autenticación
     const token = localStorage.getItem("token");
-    console.log("Token:", token);
-    console.log(formData);
-
+   
     // Asegúrate de que el campo sea 'category' en lugar de 'id_category'
     await FetchApi.setCompanyProduct(token, {
       ...formData,
@@ -64,6 +68,17 @@ const handleSubmit = async (e) => {
 
     // Lógica adicional después de la creación (por ejemplo, redireccionar)
     console.log("Producto creado con éxito");
+    // Limpiar el formulario
+    setFormData({
+      name: "",
+      id_category: "",
+      stock: "",
+      price: "",
+      description: "",
+      status: "",
+    });
+
+    navigate("/company/products");
   } catch (error) {
     if (error.response && error.response.status === 422) {
       console.error("Error de validación:", error.response.data.errors);
@@ -76,8 +91,6 @@ const handleSubmit = async (e) => {
     }
   }
 };
-
-// ...
 
 
   return (
@@ -236,12 +249,19 @@ const handleSubmit = async (e) => {
         </div>
       </div>
 
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end gap-3 mt-8">
         <button
           type="submit"
           className="text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
         >
           Registrar Producto
+        </button>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="text-black bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        >
+          Cancelar
         </button>
       </div>
     </form>

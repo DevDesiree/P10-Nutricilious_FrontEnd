@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import FetchApi from "../../services/FetchApi";
+import { useNavigate } from "react-router-dom";
 
 const CompanyForm = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
-    category: "",
+    id_category: "",  
     stock: "",
     price: "",
     description: "",
@@ -32,30 +34,64 @@ const CompanyForm = () => {
     });
   };
 
-  const obtenerTokenDeAutenticacion = () => {
-    // Lógica para obtener el token de autenticación desde el almacenamiento local
-    const token = localStorage.getItem("token");
-    return token;
+  const handleCategoryChange = (e) => {
+    setFormData({
+      ...formData,
+      id_category: e.target.value, 
+    });
   };
-  
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    try {
-      // Obtener el token de autenticación
-      const token = obtenerTokenDeAutenticacion();
-      console.log("Token:", token);
-  
-      // Realizar la llamada a la API para crear el producto con el token en la cabecera
-      await FetchApi.setCompanyProduct(formData, { headers: { Authorization: `Bearer ${token}` } });
-  
-      // Lógica adicional después de la creación (por ejemplo, redireccionar)
-      console.log("Producto creado con éxito");
-    } catch (error) {
+  const handleCancel = () => {
+    // Redirigir al usuario a la misma vista
+    navigate("/company/products");
+  };
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+ // Verificar que los campos name, id_category y stock estén llenos antes de enviar la solicitud
+ if (!formData.name || !formData.id_category || !formData.stock) {
+  console.error("Los campos name, id_category y stock son obligatorios.");
+  return;
+}
+
+  try {
+    // Obtener el token de autenticación
+    const token = localStorage.getItem("token");
+   
+    // Asegúrate de que el campo sea 'category' en lugar de 'id_category'
+    await FetchApi.setCompanyProduct(token, {
+      ...formData,
+      id_category: formData.id_category,
+    });
+
+    // Lógica adicional después de la creación (por ejemplo, redireccionar)
+    console.log("Producto creado con éxito");
+    // Limpiar el formulario
+    setFormData({
+      name: "",
+      id_category: "",
+      stock: "",
+      price: "",
+      description: "",
+      status: "",
+    });
+
+    navigate("/company/products");
+  } catch (error) {
+    if (error.response && error.response.status === 422) {
+      console.error("Error de validación:", error.response.data.errors);
+      // Mostrar los errores en el formulario
+    } else if (error.response && error.response.status === 401) {
+      console.error("Error de autenticación:", error.response.data);
+      // Manejar la falta de autorización (por ejemplo, redirigir a la página de inicio de sesión)
+    } else {
       console.error("Error al crear el producto:", error);
     }
-  };
+  }
+};
+
 
   return (
     <form
@@ -78,19 +114,21 @@ const CompanyForm = () => {
               <i className="fa fa-shopping-basket" aria-hidden="true"></i>
             </div>
             <input
-              type="name"
+              type="text"
               id="name"
               name="name"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-yellew focus:border-yellew block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellew dark:focus:border-yellew"
               placeholder="Galletas"
               required
+              value={formData.name}
+              onChange={handleInputChange}
             />
           </div>
         </div>
 
         <div>
           <label
-            htmlFor="email"
+            htmlFor="id_category"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
             Categoria
@@ -101,9 +139,10 @@ const CompanyForm = () => {
             </div>
             <select
               id="category"
-              name="category"
+              name="id_category"
               required
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-yellow-500 dark:focus:border-yellow-500"
+              onChange={handleCategoryChange}
             >
               <option value="" disabled>
                 Selecciona una categoría
@@ -119,7 +158,7 @@ const CompanyForm = () => {
 
         <div>
           <label
-            htmlFor="password"
+            htmlFor="stock"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
             Stock
@@ -141,7 +180,7 @@ const CompanyForm = () => {
 
         <div>
           <label
-            htmlFor="phone"
+            htmlFor="price"
             className="block mb-2 text-sm font-medium text-gray-900"
           >
             Precio
@@ -177,6 +216,8 @@ const CompanyForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Descripción del Producto"
               required
+              value={formData.description}
+              onChange={handleInputChange}
             ></textarea>
           </div>
         </div>
@@ -208,12 +249,19 @@ const CompanyForm = () => {
         </div>
       </div>
 
-      <div className="flex justify-end mt-8">
+      <div className="flex justify-end gap-3 mt-8">
         <button
           type="submit"
           className="text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800"
         >
           Registrar Producto
+        </button>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="text-black bg-gray-400 hover:bg-gray-500 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800"
+        >
+          Cancelar
         </button>
       </div>
     </form>

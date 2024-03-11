@@ -15,12 +15,10 @@ const CompanyProductsTable = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Selected Category:", selectedCategory);
       try {
         // Obtener productos
         const accessToken = localStorage.getItem("token");
         const companyProducts = await FetchApi.getCompanyProducts(accessToken);
-        console.log("Company Products:", companyProducts);
         setProducts(companyProducts);
 
         // Obtener categorías
@@ -72,7 +70,6 @@ const CompanyProductsTable = () => {
         <div className="flex flex-wrap gap-3">
           <select
             onChange={(e) => {
-              console.log(e.target.value); // Esto imprimirá el category.id seleccionado
               setSelectedCategory(e.target.value);
             }}
             value={selectedCategory || "Todas"}

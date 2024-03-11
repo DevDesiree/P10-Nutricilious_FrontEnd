@@ -8,6 +8,7 @@ import CompanyViewAll from "../pages/company-views/CompanyViewAll";
 import CompanyForm from "../pages/company-views/CompanyForm";
 import CompanyShow from "../pages/company-views/CompanyShow";
 import CompanyEdit from "../pages/company-views/CompanyEdit";
+import CartComponent from "../components/cart-component/CartComponent";
 
 const AdminRoute = ({ element }) => {
   const rol = localStorage.getItem('rol');
@@ -30,9 +31,10 @@ export default function Router() {
     <Routes>
         {/* Rutas publicas */}
         <Route path="/" element={<Home/>}></Route> 
-        <Route path="/product" element={<Product/>}></Route> 
-        {/* <Route path="/cart" element={<Cart/>}></Route>  */}
-        <Route path="/products" element={<Products></Products>}></Route>
+        <Route path="/products/category/:id" element={<Products/>}></Route>
+        <Route path="/product/:id" element={<Product/>}></Route> 
+        <Route path="/cart" element={<CartComponent/>}></Route> 
+     
         <Route path="/register" element={<Register/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         

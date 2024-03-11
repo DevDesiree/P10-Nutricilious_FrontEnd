@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate  } from 'react-router-dom';
 import CardComponent from "../components/card-component/CardComponent";
 import CarouselBasicExample from "../components/banner/Banner.jsx";
 import NavbarComponent from '../components/navbar-component/NavbarComponent.jsx';
@@ -13,6 +14,7 @@ import proteinaVegetal from '../assets/images/proteinaVegetal.jpg';
 import cereales from '../assets/images/cereales.jpg';
 
 const Home = () => {
+  const navigate = useNavigate(); 
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -50,11 +52,14 @@ const Home = () => {
     image7: naranja,
     image8: acete,
   };
-  
+
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/products/category/${categoryId}`);
+  };
 
   return (
     <>  
-    <NavbarComponent/> 
+    <NavbarComponent/>
     <CarouselBasicExample/>
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 my-5 gap-3 place-items-center">
       {categories.map((category, index) => (
@@ -63,6 +68,7 @@ const Home = () => {
           category={category} 
           description={categoryDescription[`category${index + 1}`]}
           imageUrl={categoryImage[`image${index + 1}`]} 
+          onButtonClick={() => handleCategoryClick(category.id)}
         />
       ))}
     </div>

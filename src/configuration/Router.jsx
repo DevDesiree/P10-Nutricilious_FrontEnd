@@ -39,14 +39,10 @@ export default function Router() {
         <Route path="/login" element={<Login/>}></Route>
         
          {/* Rutas protegidas para Company*/}
-        {/* <Route path="/company/products" element={<CompanyRoute element={<CompanyViewAll/>} />} />
+        <Route path="/company/products" element={<CompanyRoute element={<CompanyViewAll/>} />} />
         <Route path="/company/create" element={<CompanyRoute element={<CompanyForm/>} />} />
         <Route path="/company/product" element={<CompanyRoute element={<CompanyShow/>} />} />
-        <Route path="/company/edit" element={<CompanyRoute element={<CompanyEdit/>} />} /> */}
-        <Route path="/company/products" element={<CompanyViewAll/>}/>
-        <Route path="/company/create" element={<CompanyForm/>} />
-        <Route path="/company/product/:id" element={<CompanyShow />} />
-        <Route path="/company/edit/:id" element={<CompanyEdit/>} />
+        <Route path="/company/edit" element={<CompanyRoute element={<CompanyEdit/>} />} />
 
         {/* Rutas protegidas para User*/}
 

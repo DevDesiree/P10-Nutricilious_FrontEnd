@@ -35,10 +35,10 @@ const FormLogin = () => {
         // Redirige al usuario según su rol
         switch (rol) {
           case 'Admin':
-            navigate('/products');
+            navigate('/');
             break;
           case 'User':
-            navigate('/products');
+            navigate('/');
             break;
           case 'Company':
             navigate('/company/products');

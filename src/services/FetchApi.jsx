@@ -98,14 +98,19 @@ const FetchApi = {
       throw error;
     }
   },
-  // updateCompanyProduct: async (id) => {
-  //   try {
-  //     const response = await axios.get(`${API_URL}/company/products/${id}`);
-  //     return response.data;
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // },
+  updateCompanyProduct: async (id, data, token) => {
+    try {
+      const response = await axios.put(`${API_URL}/company/products/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 
   getCompanyProduct: async (accessToken, id) => {
     try {

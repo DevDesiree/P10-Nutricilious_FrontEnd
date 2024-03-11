@@ -99,6 +99,7 @@ const FetchApi = {
       throw error;
     }
   },
+
   updateCompanyProduct: async (id, data, token) => {
     try {
       const response = await axios.put(`${API_URL}/company/products/update/${id}`, data, {
@@ -148,7 +149,7 @@ const FetchApi = {
       return null;
     }
   }
-  };
+};
 
 
 export default FetchApi;

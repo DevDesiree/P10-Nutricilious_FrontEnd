@@ -12,6 +12,7 @@ const CompanyProductsTable = () => {
   const [productNameFilter, setProductNameFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
   const [errorMessage, setErrorMessage] = useState(null);
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,10 +56,24 @@ const CompanyProductsTable = () => {
   };
 
   // Función para eliminar un producto
-  const deleteProduct = (id) => {
-    // Implementa la lógica de eliminación aquí
-    // Puedes usar setProducts para actualizar la lista después de eliminar
-    console.log(`Eliminar producto con ID ${id}`);
+  const deleteProduct = async (id) => {
+    try {
+      // Obtener el token de autenticación
+      const token = localStorage.getItem("token");
+
+      // Enviar solicitud de eliminación al servidor
+      await FetchApi.deleteCompanyProduct(token, id);
+
+      // Actualizar la lista de productos después de la eliminación
+      setProducts((prevProducts) =>
+        prevProducts.filter((product) => product.id !== id)
+      );
+
+      console.log(`Producto con ID ${id} eliminado con éxito`);
+    } catch (error) {
+      console.error(`Error al eliminar el producto con ID ${id}:`, error);
+      // Puedes agregar lógica adicional para manejar errores si es necesario
+    }
   };
 
   return (

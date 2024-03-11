@@ -6,7 +6,7 @@ export default function NavbarComponent() {
 <nav className="bg-black border-black-200 dark:bg-black-900">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-5 space-x-10">
     <div>
-        <a href="" className="flex items-center space-x-5 rtl:space-x-reverse">
+        <a href="/" className="flex items-center space-x-5 rtl:space-x-reverse">
       <img src={logoNavbar} className="h-20" alt="Logo" />
       <span className="self-center text-4xl font-semibold whitespace-nowrap text-white ">Nutrilicious</span>
         </a>
@@ -28,25 +28,25 @@ export default function NavbarComponent() {
   <div className="items-center justify-center hidden w-full md:flex md:w-auto md:order-1 p-3" id="navbar-cta">
     <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-black-100 rounded-lg bg-black-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-black dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-amber-400 bg-amber-400 rounded md:bg-transparent md:text-white md:dark:text-amber-400" aria-current="page">Alimentos veganos</a>
+        <a href="/products/category/1" className="block py-2 px-3 md:p-0 text-amber-400 bg-amber-400 rounded md:bg-transparent md:text-white md:dark:text-amber-400" aria-current="page">Alimentos veganos</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-amber-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Proteínas vegetales</a>
+        <a href="/products/category/2" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-amber-400 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Proteínas vegetales</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-white  md:hover:bg-transparent md:hover:text-amber-400 d:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Granos y cereales</a>
+        <a href="/products/category/3" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-white  md:hover:bg-transparent md:hover:text-amber-400 d:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Granos y cereales</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Snacks</a>
+        <a href="/products/category/4" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Snacks</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Frutas y verduras</a>
+        <a href="/products/category/5" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Frutas y verduras</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Proteína animal</a>
+        <a href="/products/category/6" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Proteína animal</a>
       </li>
       <li>
-        <a href="#" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Aceites y condimentos</a>
+        <a href="/products/category/7" className="block py-2 px-3 md:p-0 text-white rounded hover:bg-amber-400 md:hover:bg-transparent md:hover:text-amber-400 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Aceites y condimentos</a>
       </li>
     </ul>
   </div>

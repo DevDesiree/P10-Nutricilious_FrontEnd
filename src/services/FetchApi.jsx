@@ -139,8 +139,6 @@ const FetchApi = {
     }
   },
   
-};
-
   getProductsByCategory: async (id_category) => {
     try {
       const response = await axios.get(`${API_URL}/products/category/${id_category}`);
